@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROIC Calculator - School of Investing</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);padding:20px;min-height:100vh}.container{max-width:1200px;margin:0 auto}.header{background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 4px 6px rgba(0,0,0,.1)}.header h1{font-size:42px;font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.header p{font-size:18px;color:#4a5568}.info-box{background:#e6fffa;border:3px solid #319795;border-radius:16px;padding:24px;margin-bottom:24px}.info-box h2{font-size:24px;font-weight:700;color:#234e52;margin-bottom:12px}.info-box p{font-size:16px;color:#234e52;line-height:1.6}.formula-box{background:#1a202c;color:#fff;border-radius:16px;padding:32px;margin-bottom:24px;text-align:center;font-size:36px;font-weight:700}.input-section{background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 4px 6px rgba(0,0,0,.1)}.section-header{background:#9f7aea;color:#fff;padding:16px;border-radius:12px;font-size:20px;font-weight:700;margin-bottom:20px;text-align:center}.input-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}.input-field{display:flex;flex-direction:column}.input-field label{font-size:14px;font-weight:600;color:#2d3748;margin-bottom:8px}.input-field input{padding:12px;font-size:16px;border:2px solid rgba(159,122,234,.3);border-radius:8px;outline:0}.input-field input:focus{border-color:#9f7aea}.calculate-btn{width:100%;padding:16px;font-size:18px;font-weight:700;color:#fff;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border:none;border-radius:12px;cursor:pointer;margin-top:32px}.calculate-btn:hover{transform:translateY(-2px)}.results-section{background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 4px 6px rgba(0,0,0,.1);display:none}.results-section.show{display:block}.key-result{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:12px;padding:32px;margin-bottom:32px;text-align:center}.key-result .label{color:rgba(255,255,255,.9);font-size:18px;margin-bottom:8px}.key-result .value{color:#fff;font-size:56px;font-weight:800}.key-result .sublabel{color:rgba(255,255,255,.9);font-size:18px;margin-top:8px}.breakdown-section{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}.breakdown-card{background:#f7fafc;border:3px solid #cbd5e0;border-radius:12px;padding:24px}.breakdown-card h3{font-size:20px;font-weight:700;color:#2d3748;margin-bottom:16px;padding:12px;border-radius:8px;text-align:center}.breakdown-card.ic h3{background:#9f7aea;color:#fff}.breakdown-card.nopat h3{background:#48bb78;color:#fff}.calc-step{display:flex;align-items:center;gap:12px;margin-bottom:8px;font-size:15px}.calc-step .label{flex:1;color:#4a5568;font-weight:500}.calc-step .value{font-weight:700;color:#2d3748}.calc-step .operator{font-size:20px;font-weight:700;color:#9f7aea}.subtotal{background:#fff;border-radius:8px;padding:12px;margin-top:12px;font-weight:700;display:flex;justify-content:space-between;font-size:16px;color:#2d3748}.interpretation{background:#f0fff4;border:3px solid #48bb78;border-radius:12px;padding:24px;margin-bottom:24px}.interpretation h3{font-size:22px;font-weight:700;color:#22543d;margin-bottom:16px}.interpretation-item{display:flex;align-items:start;margin-bottom:12px;padding:12px;background:#fff;border-radius:8px}.interpretation-item .icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:12px;flex-shrink:0;font-size:18px;font-weight:700;color:#fff}.interpretation-item .icon.excellent{background:#48bb78}.interpretation-item .icon.good{background:#4299e1}.interpretation-item .icon.average{background:#ed8936}.interpretation-item .icon.poor{background:#fc8181}.interpretation-item .content .title{font-weight:700;color:#2d3748;margin-bottom:4px}.interpretation-item .content .desc{font-size:14px;color:#4a5568}.tips{background:#fff5f5;border:3px solid #fc8181;border-radius:12px;padding:24px}.tips h3{font-size:22px;font-weight:700;color:#742a2a;margin-bottom:16px}.tips ul{margin:0;padding-left:24px;color:#742a2a;font-size:15px;line-height:1.8}.footer{background:#2d3748;border-radius:16px;padding:16px;text-align:center;color:#fff;font-weight:600}@media(max-width:768px){.breakdown-section{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>ROIC Calculator</h1>
+<p>Return on Invested Capital - Measure Capital Efficiency</p>
+</div>
+
+<div class="info-box">
+<h2>What is ROIC?</h2>
+<p>Return on Invested Capital (ROIC) measures a company's efficiency at allocating capital under its control to profitable investments, indicating how well it generates earnings from its invested capital.</p>
+</div>
+
+<div class="formula-box">
+ROIC = NOPAT ÷ Invested Capital
+</div>
+
+<div class="input-section">
+<div class="section-header">📊 NOPAT Components</div>
+<div class="input-grid">
+<div class="input-field">
+<label>EBIT ($M)</label>
+<input type="number" id="ebit" placeholder="88.5" step="0.1">
+</div>
+<div class="input-field">
+<label>Tax Rate (%)</label>
+<input type="number" id="taxRate" placeholder="19.1" step="0.1">
+</div>
+</div>
+
+<div class="section-header" style="margin-top:32px;background:#9f7aea">💼 Invested Capital Components</div>
+<div class="input-grid">
+<div class="input-field">
+<label>Accounts Receivable ($M)</label>
+<input type="number" id="ar" placeholder="48.6" step="0.1">
+</div>
+<div class="input-field">
+<label>Inventory ($M)</label>
+<input type="number" id="inventory" placeholder="2.5" step="0.1">
+</div>
+<div class="input-field">
+<label>Prepaid & Others ($M)</label>
+<input type="number" id="prepaid" placeholder="21.8" step="0.1">
+</div>
+<div class="input-field">
+<label>Current Assets ($M)</label>
+<input type="number" id="currentAssets" placeholder="77.9" step="0.1">
+</div>
+<div class="input-field">
+<label>Accounts Payable ($M)</label>
+<input type="number" id="ap" placeholder="18" step="0.1">
+</div>
+<div class="input-field">
+<label>Accrued Compensation ($M)</label>
+<input type="number" id="accrued" placeholder="11" step="0.1">
+</div>
+<div class="input-field">
+<label>Deferred Revenue ($M)</label>
+<input type="number" id="deferred" placeholder="50.9" step="0.1">
+</div>
+<div class="input-field">
+<label>Current Liabilities ($M)</label>
+<input type="number" id="currentLiabilities" placeholder="94.7" step="0.1">
+</div>
+<div class="input-field">
+<label>Net PPE ($M)</label>
+<input type="number" id="ppe" placeholder="95.6" step="0.1">
+</div>
+<div class="input-field">
+<label>Goodwill ($M)</label>
+<input type="number" id="goodwill" placeholder="67.8" step="0.1">
+</div>
+<div class="input-field">
+<label>Intangibles ($M)</label>
+<input type="number" id="intangibles" placeholder="9.4" step="0.1">
+</div>
+<div class="input-field">
+<label>Other Assets ($M)</label>
+<input type="number" id="otherAssets" placeholder="0" step="0.1">
+</div>
+</div>
+
+<button class="calculate-btn" onclick="calc()">Calculate ROIC</button>
+</div>
+
+<div class="results-section" id="results">
+<div class="key-result">
+<div class="label">Return on Invested Capital</div>
+<div class="value" id="roic">--</div>
+<div class="sublabel">ROIC</div>
+</div>
+
+<div class="breakdown-section">
+<div class="breakdown-card nopat">
+<h3>NOPAT Calculation</h3>
+<div class="calc-step">
+<span class="label">EBIT</span>
+<span class="value" id="ebitVal">$0.0M</span>
+</div>
+<div class="calc-step">
+<span class="operator">×</span>
+<span class="label">(1 - Tax Rate)</span>
+<span class="value" id="taxCalc">(1 - 0%)</span>
+</div>
+<div class="subtotal">
+<span>NOPAT</span>
+<span id="nopatVal">$0.0M</span>
+</div>
+</div>
+
+<div class="breakdown-card ic">
+<h3>Invested Capital</h3>
+<div class="calc-step">
+<span class="label">Accounts Receivable</span>
+<span class="value" id="arVal">$0.0M</span>
+</div>
+<div class="calc-step">
+<span class="operator">+</span>
+<span class="label">Inventory</span>
+<span class="value" id="invVal">$0.0M</span>
+</div>
+<div class="calc-step">
+<span class="operator">+</span>
+<span class="label">Prepaid & Others</span>
+<span class="value" id="prepaidVal">$0.0M</span>
+</div>
+<div class="calc-step">
+<span class="operator">+</span>
+<span class="label">Current Assets</span>
+<span class="value" id="caVal">$0.0M</span>
+</div>
+<div class="calc-step">
+<span class="operator">−</span>
+<span class="label">Current Liabilities</span>
+<span class="value" id="clVal">$0.0M</span>
+</div>
+<div class="calc-step">
+<span class="operator">+</span>
+<span class="label">Net PPE</span>
+<span class="value" id="ppeVal">$0.0M</span>
+</div>
+<div class="calc-step">
+<span class="operator">+</span>
+<span class="label">Goodwill</span>
+<span class="value" id="gwVal">$0.0M</span>
+</div>
+<div class="calc-step">
+<span class="operator">+</span>
+<span class="label">Intangibles</span>
+<span class="value" id="intVal">$0.0M</span>
+</div>
+<div class="calc-step">
+<span class="operator">+</span>
+<span class="label">Other Assets</span>
+<span class="value" id="otherVal">$0.0M</span>
+</div>
+<div class="subtotal">
+<span>Invested Capital</span>
+<span id="icVal">$0.0M</span>
+</div>
+</div>
+</div>
+
+<div class="interpretation">
+<h3>What This Means</h3>
+<div id="interpretation"></div>
+</div>
+
+<div class="tips">
+<h3>Key Insights</h3>
+<ul>
+<li><strong>Great companies have high ROIC:</strong> Look for sustained ROIC > 15%</li>
+<li><strong>Compare to WACC:</strong> ROIC should exceed the cost of capital</li>
+<li><strong>Trend matters:</strong> Improving ROIC shows better capital allocation</li>
+<li><strong>Industry context:</strong> Capital-intensive industries naturally have lower ROIC</li>
+<li><strong>Quality signal:</strong> High ROIC often indicates a competitive moat</li>
+</ul>
+</div>
+</div>
+
+<div class="footer"><strong>School of Investing</strong> • Dave Ahern</div>
+</div>
+
+<script>
+function fmt(n){return'$'+n.toFixed(1)+'M'}
+function calc(){
+const ebit=parseFloat(document.getElementById('ebit').value);
+const tax=parseFloat(document.getElementById('taxRate').value)/100;
+const ar=parseFloat(document.getElementById('ar').value)||0;
+const inv=parseFloat(document.getElementById('inventory').value)||0;
+const pre=parseFloat(document.getElementById('prepaid').value)||0;
+const ca=parseFloat(document.getElementById('currentAssets').value)||0;
+const ap=parseFloat(document.getElementById('ap').value)||0;
+const acc=parseFloat(document.getElementById('accrued').value)||0;
+const def=parseFloat(document.getElementById('deferred').value)||0;
+const cl=parseFloat(document.getElementById('currentLiabilities').value)||0;
+const ppe=parseFloat(document.getElementById('ppe').value)||0;
+const gw=parseFloat(document.getElementById('goodwill').value)||0;
+const intg=parseFloat(document.getElementById('intangibles').value)||0;
+const other=parseFloat(document.getElementById('otherAssets').value)||0;
+
+if(isNaN(ebit)||isNaN(tax)){alert('Please fill in EBIT and Tax Rate');return}
+
+const nopat=ebit*(1-tax);
+const ic=ar+inv+pre+ca-cl+ppe+gw+intg+other;
+const roic=(nopat/ic)*100;
+
+document.getElementById('roic').textContent=roic.toFixed(1)+'%';
+document.getElementById('ebitVal').textContent=fmt(ebit);
+document.getElementById('taxCalc').textContent='(1 - '+( tax*100).toFixed(1)+'%)';
+document.getElementById('nopatVal').textContent=fmt(nopat);
+document.getElementById('arVal').textContent=fmt(ar);
+document.getElementById('invVal').textContent=fmt(inv);
+document.getElementById('prepaidVal').textContent=fmt(pre);
+document.getElementById('caVal').textContent=fmt(ca);
+document.getElementById('clVal').textContent=fmt(cl);
+document.getElementById('ppeVal').textContent=fmt(ppe);
+document.getElementById('gwVal').textContent=fmt(gw);
+document.getElementById('intVal').textContent=fmt(intg);
+document.getElementById('otherVal').textContent=fmt(other);
+document.getElementById('icVal').textContent=fmt(ic);
+
+let interp='';
+if(roic>=20){
+interp='<div class="interpretation-item"><div class="icon excellent">A+</div><div class="content"><div class="title">Excellent (20%+)</div><div class="desc">Outstanding capital efficiency. This company generates exceptional returns and likely has a strong competitive moat. Examples: Apple, Microsoft, Google.</div></div></div>';
+}else if(roic>=15){
+interp='<div class="interpretation-item"><div class="icon good">A</div><div class="content"><div class="title">Good (15-20%)</div><div class="desc">Strong capital allocation. The company is creating significant value above its cost of capital. This is characteristic of quality businesses.</div></div></div>';
+}else if(roic>=10){
+interp='<div class="interpretation-item"><div class="icon average">B</div><div class="content"><div class="title">Average (10-15%)</div><div class="desc">Acceptable returns, but may struggle to create substantial value. Compare to industry peers and watch the trend.</div></div></div>';
+}else{
+interp='<div class="interpretation-item"><div class="icon poor">C</div><div class="content"><div class="title">Below Average (<10%)</div><div class="desc">Weak capital efficiency. The company may be destroying value, especially if this is below its cost of capital. Investigate further.</div></div></div>';
+}
+
+document.getElementById('interpretation').innerHTML=interp;
+document.getElementById('results').classList.add('show');
+document.getElementById('results').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
