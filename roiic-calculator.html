@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROIIC Calculator - School of Investing</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);padding:20px;min-height:100vh}.container{max-width:1200px;margin:0 auto}.header{background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 4px 6px rgba(0,0,0,.1)}.header h1{font-size:42px;font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.header p{font-size:18px;color:#4a5568}.info-box{background:#e6fffa;border:3px solid #319795;border-radius:16px;padding:24px;margin-bottom:24px}.info-box h2{font-size:24px;font-weight:700;color:#234e52;margin-bottom:12px}.info-box p{font-size:16px;color:#234e52;line-height:1.6;margin-bottom:12px}.formula-box{background:#1a202c;color:#fff;border-radius:16px;padding:24px;margin-bottom:24px;text-align:center}.formula-box .main{font-size:32px;font-weight:700;margin-bottom:12px}.formula-box .sub{font-size:16px;opacity:.8}.buffett-quote{background:#fef5e7;border:3px solid #f39c12;border-radius:12px;padding:20px;margin-bottom:24px;font-style:italic;color:#7d6608;text-align:center;font-size:16px}.input-section{background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 4px 6px rgba(0,0,0,.1)}.input-section h2{font-size:28px;font-weight:700;margin-bottom:16px;color:#2d3748}.input-help{background:#ebf8ff;border-left:4px solid #4299e1;padding:12px 16px;margin-bottom:24px;font-size:14px;color:#2c5282;border-radius:4px}.year-inputs{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px}.year-col{background:#f7fafc;border:2px solid #e2e8f0;border-radius:12px;padding:16px}.year-col h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:12px;text-align:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:8px;border-radius:8px}.input-field{margin-bottom:12px}.input-field label{font-size:12px;font-weight:600;color:#4a5568;margin-bottom:4px;display:block}.input-field input{width:100%;padding:8px;font-size:14px;border:2px solid rgba(159,122,234,.3);border-radius:6px;outline:0}.input-field input:focus{border-color:#9f7aea}.calculate-btn{width:100%;padding:16px;font-size:18px;font-weight:700;color:#fff;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border:none;border-radius:12px;cursor:pointer;margin-top:32px}.calculate-btn:hover{transform:translateY(-2px)}.results-section{background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 4px 6px rgba(0,0,0,.1);display:none}.results-section.show{display:block}.summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:32px}.summary-card{border-radius:12px;padding:24px;text-align:center}.summary-card .label{font-size:14px;color:#4a5568;margin-bottom:8px;font-weight:600}.summary-card .value{font-size:36px;font-weight:800;color:#2d3748;margin-bottom:4px}.summary-card .sublabel{font-size:12px;color:#718096}.results-table{background:#f7fafc;border:2px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:32px;overflow-x:auto}.results-table h3{font-size:20px;font-weight:700;color:#2d3748;margin-bottom:16px}.table{width:100%;border-collapse:collapse}.table th{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:12px;text-align:center;font-size:14px;font-weight:700}.table th:first-child{border-radius:8px 0 0 0}.table th:last-child{border-radius:0 8px 0 0}.table td{padding:12px;text-align:center;border-bottom:1px solid #e2e8f0;font-size:14px;color:#2d3748}.table tr:last-child td{border-bottom:none}.table tr:nth-child(even){background:#fff}.table .highlight{background:#48bb78;color:#fff;font-weight:700;border-radius:6px;padding:4px 8px}.chart-container{background:#f7fafc;border:3px solid #cbd5e0;border-radius:12px;padding:24px;margin-bottom:32px}.chart-container h3{font-size:22px;font-weight:700;color:#2d3748;margin-bottom:20px;text-align:center}.chart{position:relative;height:300px;display:flex;align-items:flex-end;gap:12px;padding:20px 0}.chart-bar{flex:1;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:8px 8px 0 0;position:relative;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;transition:all .3s}.chart-bar .value{color:#fff;font-weight:700;font-size:14px;margin-bottom:8px}.chart-bar .year{position:absolute;bottom:-30px;font-size:12px;font-weight:600;color:#4a5568}.interpretation{background:#f0fff4;border:3px solid #48bb78;border-radius:12px;padding:24px;margin-bottom:24px}.interpretation h3{font-size:22px;font-weight:700;color:#22543d;margin-bottom:16px}.interpretation-item{background:#fff;border-radius:8px;padding:16px;margin-bottom:12px;display:flex;align-items:start;gap:12px}.interpretation-item .icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}.interpretation-item .icon.excellent{background:#48bb78;color:#fff}.interpretation-item .icon.good{background:#4299e1;color:#fff}.interpretation-item .icon.average{background:#ed8936;color:#fff}.interpretation-item .icon.poor{background:#fc8181;color:#fff}.interpretation-item .content .title{font-weight:700;color:#2d3748;margin-bottom:4px;font-size:16px}.interpretation-item .content .desc{color:#4a5568;font-size:14px;line-height:1.6}.key-insights{background:#fff5f5;border:3px solid #fc8181;border-radius:12px;padding:24px}.key-insights h3{font-size:22px;font-weight:700;color:#742a2a;margin-bottom:16px}.key-insights ul{margin:0;padding-left:24px;color:#742a2a;font-size:15px;line-height:1.8}.footer{background:#2d3748;border-radius:16px;padding:16px;text-align:center;color:#fff;font-weight:600}@media(max-width:1024px){.year-inputs{grid-template-columns:repeat(3,1fr)}}@media(max-width:768px){.year-inputs{grid-template-columns:1fr}.summary-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>ROIIC Calculator</h1>
+<p>Return on Incremental Invested Capital - The Ultimate Quality Test</p>
+</div>
+
+<div class="info-box">
+<h2>What is ROIIC?</h2>
+<p>ROIIC measures how efficiently a company deploys NEW capital. While ROIC shows historical returns, ROIIC reveals whether management can profitably reinvest for growth.</p>
+<p><strong>High ROIIC (>20%) = Company can reinvest at attractive rates = Long runway for growth</strong></p>
+<p><strong>Low ROIIC (<10%) = Running out of opportunities = Growth may destroy value</strong></p>
+</div>
+
+<div class="formula-box">
+<div class="main">ROIIC = ΔNOPAT ÷ ΔInvested Capital</div>
+<div class="sub">Change in NOPAT divided by Change in Invested Capital</div>
+</div>
+
+<div class="buffett-quote">
+💡 "The key to investing is determining the competitive advantage of any given company and, above all, the durability of that advantage. The products or services that have wide, sustainable moats around them are the ones that deliver rewards to investors." — Warren Buffett
+</div>
+
+<div class="input-section">
+<h2>Enter Annual Data (5 Years)</h2>
+<div class="input-help">
+📊 <strong>Where to find this data:</strong> Use our ROIC Calculator to get NOPAT and Invested Capital for each year, or calculate from the balance sheet and income statement. ROIIC is calculated year-over-year, so you'll get 4 ROIIC values from 5 years of data.
+</div>
+
+<div class="year-inputs">
+<div class="year-col">
+<h3>Year 1</h3>
+<div class="input-field">
+<label>NOPAT ($M)</label>
+<input type="number" id="nopat1" placeholder="50.0" step="0.1">
+</div>
+<div class="input-field">
+<label>Invested Capital ($M)</label>
+<input type="number" id="ic1" placeholder="300.0" step="0.1">
+</div>
+</div>
+
+<div class="year-col">
+<h3>Year 2</h3>
+<div class="input-field">
+<label>NOPAT ($M)</label>
+<input type="number" id="nopat2" placeholder="55.0" step="0.1">
+</div>
+<div class="input-field">
+<label>Invested Capital ($M)</label>
+<input type="number" id="ic2" placeholder="325.0" step="0.1">
+</div>
+</div>
+
+<div class="year-col">
+<h3>Year 3</h3>
+<div class="input-field">
+<label>NOPAT ($M)</label>
+<input type="number" id="nopat3" placeholder="62.0" step="0.1">
+</div>
+<div class="input-field">
+<label>Invested Capital ($M)</label>
+<input type="number" id="ic3" placeholder="350.0" step="0.1">
+</div>
+</div>
+
+<div class="year-col">
+<h3>Year 4</h3>
+<div class="input-field">
+<label>NOPAT ($M)</label>
+<input type="number" id="nopat4" placeholder="70.0" step="0.1">
+</div>
+<div class="input-field">
+<label>Invested Capital ($M)</label>
+<input type="number" id="ic4" placeholder="380.0" step="0.1">
+</div>
+</div>
+
+<div class="year-col">
+<h3>Year 5</h3>
+<div class="input-field">
+<label>NOPAT ($M)</label>
+<input type="number" id="nopat5" placeholder="80.0" step="0.1">
+</div>
+<div class="input-field">
+<label>Invested Capital ($M)</label>
+<input type="number" id="ic5" placeholder="415.0" step="0.1">
+</div>
+</div>
+</div>
+
+<button class="calculate-btn" onclick="calc()">Calculate ROIIC</button>
+</div>
+
+<div class="results-section" id="results">
+<div class="summary-grid">
+<div class="summary-card" style="background:rgba(72,187,120,.15);border:2px solid #48bb78">
+<div class="label">Average ROIIC</div>
+<div class="value" id="avgROIIC">--</div>
+<div class="sublabel">4-Year Average</div>
+</div>
+<div class="summary-card" style="background:rgba(66,153,225,.15);border:2px solid #4299e1">
+<div class="label">Latest ROIIC</div>
+<div class="value" id="latestROIIC">--</div>
+<div class="sublabel">Most Recent Year</div>
+</div>
+</div>
+
+<div class="results-table">
+<h3>Year-by-Year ROIIC Breakdown</h3>
+<table class="table">
+<thead>
+<tr>
+<th>Period</th>
+<th>ΔNOPAT</th>
+<th>ΔInvested Capital</th>
+<th>ROIIC</th>
+<th>Rating</th>
+</tr>
+</thead>
+<tbody id="tableBody">
+</tbody>
+</table>
+</div>
+
+<div class="chart-container">
+<h3>ROIIC Trend</h3>
+<div class="chart" id="chart"></div>
+</div>
+
+<div class="interpretation">
+<h3>What This Means</h3>
+<div id="interpretation"></div>
+</div>
+
+<div class="key-insights">
+<h3>Key Insights About ROIIC</h3>
+<ul>
+<li><strong>Better than ROIC alone:</strong> ROIIC shows if NEW capital is deployed well, not just historical performance</li>
+<li><strong>Competitive moat indicator:</strong> Consistently high ROIIC (>20%) suggests durable advantages</li>
+<li><strong>Reinvestment runway:</strong> High ROIIC means the company can grow profitably for years</li>
+<li><strong>Capital allocation quality:</strong> Improving ROIIC shows management is getting better at deploying capital</li>
+<li><strong>Growth sustainability:</strong> Low ROIIC (<10%) suggests the company is running out of good opportunities</li>
+<li><strong>Watch the trend:</strong> Declining ROIIC may signal increasing competition or market saturation</li>
+</ul>
+</div>
+</div>
+
+<div class="footer"><strong>School of Investing</strong> • Dave Ahern</div>
+</div>
+
+<script>
+function fmt(n){return'$'+n.toFixed(1)+'M'}
+function calc(){
+const nopat=[
+parseFloat(document.getElementById('nopat1').value),
+parseFloat(document.getElementById('nopat2').value),
+parseFloat(document.getElementById('nopat3').value),
+parseFloat(document.getElementById('nopat4').value),
+parseFloat(document.getElementById('nopat5').value)
+];
+const ic=[
+parseFloat(document.getElementById('ic1').value),
+parseFloat(document.getElementById('ic2').value),
+parseFloat(document.getElementById('ic3').value),
+parseFloat(document.getElementById('ic4').value),
+parseFloat(document.getElementById('ic5').value)
+];
+
+if(nopat.some(isNaN)||ic.some(isNaN)){alert('Please fill in all fields');return}
+
+const roiic=[];
+const periods=['Y1→Y2','Y2→Y3','Y3→Y4','Y4→Y5'];
+let tableHTML='';
+let chartHTML='';
+let maxROIIC=0;
+
+for(let i=0;i<4;i++){
+const dNOPAT=nopat[i+1]-nopat[i];
+const dIC=ic[i+1]-ic[i];
+const r=dIC!==0?(dNOPAT/dIC)*100:0;
+roiic.push(r);
+if(Math.abs(r)>maxROIIC)maxROIIC=Math.abs(r);
+
+let rating='';
+let ratingClass='';
+if(r>=25){rating='Excellent';ratingClass='excellent'}
+else if(r>=20){rating='Very Good';ratingClass='excellent'}
+else if(r>=15){rating='Good';ratingClass='good'}
+else if(r>=10){rating='Average';ratingClass='average'}
+else{rating='Below Avg';ratingClass='poor'}
+
+tableHTML+=`<tr>
+<td><strong>${periods[i]}</strong></td>
+<td>${fmt(dNOPAT)}</td>
+<td>${fmt(dIC)}</td>
+<td><span class="highlight">${r.toFixed(1)}%</span></td>
+<td>${rating}</td>
+</tr>`;
+}
+
+document.getElementById('tableBody').innerHTML=tableHTML;
+
+const avgROIIC=roiic.reduce((a,b)=>a+b,0)/roiic.length;
+const latestROIIC=roiic[roiic.length-1];
+
+document.getElementById('avgROIIC').textContent=avgROIIC.toFixed(1)+'%';
+document.getElementById('latestROIIC').textContent=latestROIIC.toFixed(1)+'%';
+
+for(let i=0;i<4;i++){
+const height=Math.min((Math.abs(roiic[i])/Math.max(maxROIIC,30))*100,100);
+const color=roiic[i]>=0?'linear-gradient(135deg,#667eea 0%,#764ba2 100%)':'linear-gradient(135deg,#fc8181 0%,#e53e3e 100%)';
+chartHTML+=`<div class="chart-bar" style="height:${height}%;background:${color}">
+<div class="value">${roiic[i].toFixed(1)}%</div>
+<div class="year">${periods[i]}</div>
+</div>`;
+}
+document.getElementById('chart').innerHTML=chartHTML;
+
+let interp='';
+if(avgROIIC>=20){
+interp=`<div class="interpretation-item"><div class="icon excellent">A+</div><div class="content"><div class="title">Exceptional Capital Deployment (${avgROIIC.toFixed(1)}% avg)</div><div class="desc">This company has a wide moat and can profitably reinvest for years. Every dollar of new capital generates ${(avgROIIC/100).toFixed(2)} dollars of additional profit. This is the hallmark of a high-quality compounder. Examples: Google, Microsoft, Visa.</div></div></div>`;
+}else if(avgROIIC>=15){
+interp=`<div class="interpretation-item"><div class="icon good">A</div><div class="content"><div class="title">Strong Reinvestment Opportunity (${avgROIIC.toFixed(1)}% avg)</div><div class="desc">The company can deploy new capital at attractive rates. This supports profitable growth and suggests competitive advantages. Management is doing well with capital allocation.</div></div></div>`;
+}else if(avgROIIC>=10){
+interp=`<div class="interpretation-item"><div class="icon average">B</div><div class="content"><div class="title">Moderate Returns (${avgROIIC.toFixed(1)}% avg)</div><div class="desc">New capital generates acceptable but not exceptional returns. The company may be maturing or facing more competition. Watch the trend carefully.</div></div></div>`;
+}else{
+interp=`<div class="interpretation-item"><div class="icon poor">C</div><div class="content"><div class="title">Weak Incremental Returns (${avgROIIC.toFixed(1)}% avg)</div><div class="desc">The company is struggling to deploy new capital profitably. This suggests limited growth opportunities or poor capital allocation. Growth may destroy value at this rate.</div></div></div>`;
+}
+
+const trend=roiic[3]-roiic[0];
+if(trend>5){
+interp+=`<div class="interpretation-item"><div class="icon excellent">📈</div><div class="content"><div class="title">Improving Trend</div><div class="desc">ROIIC has improved by ${trend.toFixed(1)} percentage points. The competitive moat may be strengthening, or management is getting better at capital allocation.</div></div></div>`;
+}else if(trend<-5){
+interp+=`<div class="interpretation-item"><div class="icon poor">📉</div><div class="content"><div class="title">Declining Trend</div><div class="desc">ROIIC has declined by ${Math.abs(trend).toFixed(1)} percentage points. This may indicate increasing competition, market saturation, or deteriorating business quality.</div></div></div>`;
+}else{
+interp+=`<div class="interpretation-item"><div class="icon good">➡️</div><div class="content"><div class="title">Stable Trend</div><div class="desc">ROIIC has remained relatively consistent. The business is maintaining its competitive position.</div></div></div>`;
+}
+
+document.getElementById('interpretation').innerHTML=interp;
+document.getElementById('results').classList.add('show');
+document.getElementById('results').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
